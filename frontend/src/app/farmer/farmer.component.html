@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <h3>Farmer {{user_data | uppercase}}!</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <button class="btn btn-info" (click) = 'add_nursery()'>Add Nursery</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-warning" (click) = 'new_Password()'>Change PASSWORD</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-danger" (click) = 'logout()'>Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>My Nurseries</p></b>
+            </tr>
+            <tr>
+                <th>Nursery name</th>
+                <th>Location</th>
+                <th>Planted seedling number</th>
+                <th>Empty number</th>
+                <th>Water level (points)</th>
+                <th>Temperature level (celsius)</th>
+                <th>View button</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let nursery of nurseries">
+                <td>{{nursery.name}}</td>
+                <td>{{nursery.location}}</td>
+                <td>{{nursery.plants.length}}</td>
+                <td>{{nursery.height * nursery.width - nursery.plants.length}}</td>
+                <td>{{nursery.water}}</td>
+                <td>{{nursery.temperature}}</td>
+                <td><button class="btn btn-warning btn-block" (click)='view_nursery(nursery.name, nursery.location)'>View</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+<footer>
+    <div class="container pt-5 border-bottom">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+            <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+          </div>
+  
+          <div class="col-md-8">
+            <div class="py-4 d-flex justify-content-center align-items-center">
+              <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </footer>

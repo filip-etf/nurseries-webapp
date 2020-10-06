@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <h3>Online Shop!</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <button class="btn btn-info" (click)='view_basket()'>View Basket</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-info" (click)='view_nursery()'>Nursery</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-danger" (click) = 'logout()'>Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>Shop Items</p></b>
+            </tr>
+            <tr>
+                <input type="text" name="filter_data" [(ngModel)]='filter_data' required class="form-control">
+                <button class="btn btn-info my-2" (click)='product_search()'>Search</button>
+                <button class="btn btn-primary my-2" (click)='reset()'>Reset</button>
+            </tr>
+            <br>
+            <tr>
+                <th>Type</th>
+                <th>Product name</th>
+                <th>Producer name</th>
+                <th>In stock</th>
+                <th>Insert Quantity</th>
+                <th [hidden] = "true">Avarage rating</th>
+                <th>Details button</th>
+                <th>Add to Basket</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let item of items">
+                <td>{{item.type}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.producer_name}}</td>
+                <td>{{item.available_quantity}}</td>
+                <td><input id="{{items.indexOf(item)}}" class="form-control" type="number" [(ngModel)]='quantity[items.indexOf(item)]' name='quantity'></td>
+                <td [hidden] = "true">Izracunati kroz komentare</td>
+                <td><button class="btn btn-warning btn-block" (click)='product_details(item.name, item.type, item.producer_name)'>Details</button></td>
+                <td><button class="btn btn-info btn-block" (click)='add_basket(item.name, item.type, item.producer_name, item.accelerating_time, item.growing_time)'>ADD</button></td>
+              </tr>
+        </tbody>
+    </table>
+    
+    <span style='color: red'>
+        {{message}}
+    </span>
+</body>
+
+<footer>
+    <div class="container pt-5 border-bottom">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+            <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+          </div>
+  
+          <div class="col-md-8">
+            <div class="py-4 d-flex justify-content-center align-items-center">
+              <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+            </div>
+          </div>
+      </div>
+    </div>
+</footer>

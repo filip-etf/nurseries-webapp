@@ -1,0 +1,165 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <h3>Product DETAILS</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <button class="btn btn-danger" (click) = 'logout()'>Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+    <br>
+    
+    <table class="table table-striped" [hidden] = '!seedling' border="0">
+        <thead>
+            <tr >
+                <b><p>PRODUCTS SEEDLINGS</p></b>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Seedling name</th>
+                <th>{{this.product[0].name}}</th>
+            </tr>
+            <tr>
+                <th>Producer name</th>
+                <th>{{this.product[0].producer_name}}</th>
+            </tr>
+            <tr>
+                <th>Growing time (days)</th>
+                <th>{{this.product[0].growing_time}}</th>
+            </tr>
+            <tr>
+                <th>Preparation List</th>
+                <th>
+                    <ul *ngFor = "let preparation of this.product[0].preparations">
+                        <li>{{preparation.name}}</li>
+                    </ul>
+                </th>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <th>{{this.product[0].available_quantity}}</th>
+            </tr>
+            <tr>
+                <th>Avarage rating</th>
+                <th>{{avarage_rating}}</th>
+            </tr>
+            <tr>
+                <th>Unit price</th>
+                <th>{{this.product[0].unit_price}}</th>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table [hidden] = 'seedling' border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>PRODUCTS PREPARATION</p></b>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Preparation name</th>
+                <th>{{product[0].name}}</th>
+            </tr>
+            <tr>
+                <th>Producer name</th>
+                <th>{{product[0].producer_name}}</th>
+            </tr>
+            <tr>
+                <th>Unit price</th>
+                <th>{{product[0].unit_price}}</th>
+            </tr>
+            <tr>
+                <th>Acceleration time (days)</th>
+                <th>{{product[0].accelerating_time}}</th>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <th>{{product[0].available_quantity}}</th>
+            </tr>
+            <tr>
+                <th>Avarage rating</th>
+                <th>{{avarage_rating}}</th>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    
+     <form #commentForm = "ngForm">
+        <table border="0" [hidden] = "hideComment">
+            <tr>
+                <b><p>ADD COMMENT</p></b>
+            </tr>
+            <tr>
+                <th>Rating (0-10)</th>
+                <th><input type="number" [(ngModel)]='rating' name='rating' class="form-control" #commrate="ngModel" [class.is-invalid] = "commrate.invalid && commrate.touched" required></th>
+            </tr>
+            <tr>
+                <th>Describe</th>
+                <th><textarea [(ngModel)]='describe' name='describe' class="form-control" #commdesc="ngModel" [class.is-invalid] = "commdesc.invalid && commdesc.touched" required></textarea></th>
+            </tr>
+            <br>
+            <tr><button [disabled] = "commentForm.form.invalid && commentForm.form.invalid" class="btn btn-info" (click)="add_comment()">Comment</button></tr>
+        </table>
+     </form>
+    
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>PRODUCTS COMMENTS</p></b>
+            </tr>
+            <tr>
+                <th>Farmer username</th>
+                <th>Rating</th>
+                <th>Describe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let comment of comments">
+                <th>{{comment.username}}</th>
+                <th>{{comment.rating}}</th>
+                <th>{{comment.describe}}</th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+<footer>
+    <div class="container pt-5 border-bottom">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+            <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+          </div>
+  
+          <div class="col-md-8">
+            <div class="py-4 d-flex justify-content-center align-items-center">
+              <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+            </div>
+          </div>
+      </div>
+    </div>
+</footer>

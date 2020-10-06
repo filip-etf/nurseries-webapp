@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <h3>Nursery {{nursery_data | uppercase}}!</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <button class="btn btn-info" (click) = 'view_stockroom()'>Stockroom</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-info" (click) = 'online_shop()'>Online Shop</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-info" (click) = 'view_farmer()'>Farmer</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-danger" (click) = 'logout()'>Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+    <br>
+    
+    <table>
+        <tr>
+            <th>Water level</th>
+            <th>Temperature level</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" value="{{nursery.water}}" [(ngModel)]='nursery.water' name="nursery.water" required class="form-control">
+            </td>
+            <td>
+                <input type="number" value="{{nursery.temperature}}" [(ngModel)]='nursery.temperature' name="nursery.temperature" required class="form-control">
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)='update_nursery()'>Update</button>
+            </td>
+        </tr>
+    </table>
+    
+    <br>
+    
+    <form #nursForm = "ngForm">
+        <table border="0" class="table">
+            <thead>
+                <tr >
+                    <b><p>ADD SEEDLINGS</p></b>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Add button</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="name" [(ngModel)]='name' class="browser-default custom-select" #nursseed="ngModel" [class.is-invalid] = "nursseed.invalid && nursseed.touched" required>  
+                          <option *ngFor = "let seedling of available_seedlings" [value]="seedling">{{seedling}}</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="width" [(ngModel)]='width' class="form-control" #nurswidth="ngModel" [class.is-invalid] = "nurswidth.invalid && nurswidth.touched" required></td>
+                    <td><input type="number" name="height" [(ngModel)]='height' class="form-control" #nursheight="ngModel" [class.is-invalid] = "nursheight.invalid && nursheight.touched" required></td>
+                    <td><button [disabled] = "nursForm.form.invalid && nursForm.form.invalid" class="btn btn-primary btn-block" (click)='add_seedling()'>Add</button></td>
+                </tr>
+            </tbody>            
+        </table>
+    </form>
+    
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>NURSERY SEEDLINGS</p></b>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Producer</th>
+                <th>Growing time</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Planted date</th>
+                <th>Progress</th>
+                <th>View button</th>
+                <th>Remove button</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let seedling of nursery.plants">
+                <td>{{seedling.seedling_name}}</td>
+                <td>{{seedling.producer}}</td>
+                <td>{{seedling.growing_time}}</td>
+                <td>{{seedling.width}}</td>
+                <td>{{seedling.height}}</td>
+                <td>{{seedling.planted_date | date: 'yyyy-MM-dd'}}</td>
+                <td><button class="btn btn-primary btn-block" (click)='show_progress(seedling.planted_date, seedling.growing_time)'>Show</button></td>
+                <td><button class="btn btn-warning btn-block" (click)='view_seedling(seedling.width, seedling.height)'>View</button></td>
+                <td [hidden] = '!seedling.progress'><button class="btn btn-danger btn-block" (click)='remove_seedling(seedling.width, seedling.height)'>Remove</button></td>
+            </tr>
+        
+            <tr>
+                <td><b>Progress:</b> {{progress}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <span style='color: red'>
+        {{message}}
+      </span>
+</body>
+
+<footer>
+    <div class="container pt-5 border-bottom">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+            <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+          </div>
+  
+          <div class="col-md-8">
+            <div class="py-4 d-flex justify-content-center align-items-center">
+              <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </footer>

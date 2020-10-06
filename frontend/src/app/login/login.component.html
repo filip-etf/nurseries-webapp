@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <h5>Welcome to Nursery garden servis!</h5>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='login'>Login<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign in</h5>
+            <form>
+              <table>
+                <tr>
+                  <td>
+                    <input required class="form-control" type='text' [(ngModel)]='username' name='username' placeholder="First name">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input required class="form-control" type='password' [(ngModel)]='password' name='password' placeholder="password">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-3 waves-effect" (click)='login()'>Sign in</button>
+                  </td>
+                </tr>
+                <br>
+                <tr>
+                  <th>
+                    <a [routerLink] = "['/register']" [queryParams] = "{type: 'farmer'}">Register Farmer</a>
+                  </th>
+                  <th>
+                    <a [routerLink] = "['/register']" [queryParams] = "{type: 'company'}">Register Company</a>
+                  </th></tr>
+              </table>
+            </form>
+  
+            <span style='color: red'>
+              {{message}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<footer>
+  <div class="container pt-5 border-bottom">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+          <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+        </div>
+
+        <div class="col-md-8">
+          <div class="py-4 d-flex justify-content-center align-items-center">
+            <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+          </div>
+        </div>
+    </div>
+  </div>
+</footer>

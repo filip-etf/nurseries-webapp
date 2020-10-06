@@ -1,0 +1,184 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li [hidden] = 'isAdmin' class="nav-item active">
+          <a class="nav-link" routerLink='../login'>Login<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Registration</h5>
+            
+            <form #farmerForm = "ngForm">
+              <table [hidden] = 'farmer'>
+                <tr>
+                  <td><p><b>Farmer:</b></p></td>
+                </tr>
+                <tr>
+                  <td>Firstname:</td>
+                  <td>
+                    <input type='text' name='firstname' [(ngModel)]='firstname' class="form-control" #farmername="ngModel" [class.is-invalid] = "farmername.invalid && farmername.touched" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lastname:</td>
+                  <td>
+                    <input type='text' name='lastname' [(ngModel)]='lastname' class="form-control" #farmerlastname="ngModel" [class.is-invalid] = "farmerlastname.invalid && farmerlastname.touched" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Username:</td>
+                  <td>
+                    <input type='text' name='username' [(ngModel)]='username' class="form-control" #farmerusername="ngModel" [class.is-invalid] = "farmerusername.invalid && farmerusername.touched" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Password:</td>
+                  <td>
+                    <input type='password' name='password' [(ngModel)]='password' class="form-control" #farmerpass="ngModel" [class.is-invalid] = "farmerpass.invalid && farmerpass.touched" pattern="(?=^[A-Z].{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*?[#?!@$%^&*-]).*$" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Confirm Password:</td>
+                  <td>
+                    <input type='password' name='password_conf' [(ngModel)]='password_conf' class="form-control" #farmerpassconf="ngModel" [class.is-invalid] = "farmerpassconf.invalid && farmerpassconf.touched" pattern="(?=^[A-Z].{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*?[#?!@$%^&*-]).*$" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Birthday date:</td>
+                  <td>
+                    <input type='date' name='date' [(ngModel)]='date' class="form-control" #farmerdate="ngModel" [class.is-invalid] = "farmerdate.invalid && farmerdate.touched" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Birthday city:</td>
+                  <td>
+                    <input type='text' name='city' [(ngModel)]='city' class="form-control" #farmercity="ngModel" [class.is-invalid] = "farmercity.invalid && farmercity.touched" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone number:</td>
+                  <td>
+                    <input type='text' name='phone' [(ngModel)]='phone' class="form-control" #farmerphone="ngModel" [class.is-invalid] = "farmerphone.invalid && farmerphone.touched" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mail:</td>
+                  <td>
+                    <input type='text' name='mail' [(ngModel)]='mail' class="form-control" #farmermail="ngModel" [class.is-invalid] = "farmermail.invalid && farmermail.touched" required>
+                  </td>
+                </tr>
+              </table>
+            </form>
+
+            <form #companyForm = "ngForm">
+              <table [hidden] = 'company'>
+                <tr>
+                  <td><p><b>Company:</b></p></td>
+                </tr>
+                <tr>
+                  <td>Company name:</td>
+                  <td>
+                    <input type='text' #copmanyname="ngModel" [class.is-invalid] = "copmanyname.invalid && copmanyname.touched" required class="form-control" name='company_name' [(ngModel)]='company_name'>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Company acronym:</td>
+                  <td>
+                    <input type='text' #copmanyacronym="ngModel" [class.is-invalid] = "copmanyacronym.invalid && copmanyacronym.touched" required name='company_acronym' [(ngModel)]='company_acronym' class="form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Password:</td>
+                  <td>
+                    <input type='password' #copmanypass="ngModel" [class.is-invalid] = "copmanypass.invalid && copmanypass.touched" required name='password' [(ngModel)]='password' class="form-control" pattern="(?=^[A-Z].{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*?[#?!@$%^&*-]).*$">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Confirm Password:</td>
+                  <td>
+                    <input type='password' #copmanypassword="ngModel" [class.is-invalid] = "copmanypassword.invalid && copmanypassword.touched" required name='password_conf' [(ngModel)]='password_conf' class="form-control" pattern="(?=^[A-Z].{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*?[#?!@$%^&*-]).*$">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Foundation date:</td>
+                  <td>
+                    <input type='date' #copmanydate="ngModel" [class.is-invalid] = "copmanydate.invalid && copmanydate.touched" required name='date' [(ngModel)]='date' class="form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Company location:</td>
+                  <td>
+                    <input type='text' #copmanylocation="ngModel" [class.is-invalid] = "copmanylocation.invalid && copmanylocation.touched" required name='city' [(ngModel)]='city' class="form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mail:</td>
+                  <td>
+                    <input type='text' #copmanymail="ngModel" [class.is-invalid] = "copmanymail.invalid && copmanymail.touched" required name='mail' [(ngModel)]='mail' class="form-control">
+                  </td>
+                </tr>
+              </table>
+            
+              <table>
+                <tr>
+                  <td>
+                    <button [disabled] = "companyForm.form.invalid && farmerForm.form.invalid" type="submit" class="btn btn-primary" [hidden] = 'isAdmin' (click)='register()'>Register</button>
+                    <button [disabled] = "companyForm.form.invalid" class="btn btn-primary" [hidden] = '!isAdmin' (click)='admin_register()'>ADD USER</button>
+                  </td>
+                  <td [hidden] = 'isAdmin'>
+                    <a routerLink='../login'>Back</a>
+                  </td>
+                </tr>
+              </table>
+            </form>
+  
+            <span style='color: red'>
+              {{message}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</body>
+
+<footer>
+  <div class="container pt-5 border-bottom">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+          <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+        </div>
+
+        <div class="col-md-8">
+          <div class="py-4 d-flex justify-content-center align-items-center">
+            <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+          </div>
+        </div>
+    </div>
+  </div>
+</footer>

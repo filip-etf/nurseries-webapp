@@ -1,0 +1,207 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+  <div class="container-fluid">
+    <a class="navbar-brand js-scroll-trigger" href="index.html">
+      <h2></h2>
+     <img src="../../assets/LogoMakr_8mqqmz.png" height="65" width="65" >
+    </a>
+    <h3>Company {{user_data | uppercase}}</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <button class="btn btn-info" (click)='add_product()'>ADD PRODUCT</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-info" (click)='load_json()'>Load JSON</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-warning" (click) = 'new_Password()'>Change PASSWORD</button>
+        </li>
+        <li class="nav-item active">
+            <button class="btn btn-danger" (click) = 'logout()'>Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr>
+                <th colspan="2"><b><p>PRODUCTS REQUESTS</p></b></th>
+            </tr>
+            <tr>
+                <button class="btn btn-info" (click)='date_sort()'>DATE SORT</button>
+            </tr>
+            <br>
+            <tr>
+                <th>Farmer username</th>
+                <th>Product type</th>
+                <th>Product name</th>
+                <th>Product quantity</th>
+                <th>Nursery location</th>
+                <th>Filing Date</th>
+                <th>Status</th>
+                <th>Change status</th>
+                <th>Accept request</th>
+                <th>Refuse request</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let request of products_requests">
+                <td>{{request.username}}</td>
+                <td>
+                    <ul *ngFor = "let products of request.product_array">
+                        <li>
+                            {{products.type}}
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul *ngFor = "let products of request.product_array">
+                        <li>
+                            {{products.name}}
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul *ngFor = "let products of request.product_array">
+                        <li>
+                            {{products.quantity}}
+                        </li>
+                    </ul>
+                </td>
+                <td>{{request.location}}</td>
+                <td>{{request.filing_date | date: 'yyyy-MM-dd'}}</td>
+                <td>{{request.status | uppercase}}</td>
+                <td>
+                    <select class="browser-default custom-select" name="status" [(ngModel)]='status'> 
+                    <option value="non_delivered">Non Delivered</option>
+                    <option value="delivering">Delivering</option>
+                    <option value="waiting">Waiting</option>
+                    <option value="delivered">Delivered</option>
+                    </select>
+                    <br>
+                    <button class="btn btn-info btn-block" (click)='change_status(request.username, request.nursery_name)'>Save</button>
+                </td>
+                <td><button class="btn btn-success btn-block" (click)='accept_request(request.username, request.nursery_name)'>Accept</button></td>
+                <td><button class="btn btn-danger btn-block" (click)='refuse_request(request.username, request.nursery_name, request.producer, request.product_array)'>Refuse</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>PRODUCTS</p></b>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Available Quantity</th>
+                <th>Unit price</th>
+                <th>Details</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let product of products">
+                <td>{{product.type}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.available_quantity}}</td>
+                <td>{{product.unit_price}}</td>
+                <td><button class="btn btn-warning btn-block" (click)='product_details(product.name, product.type, product.producer_name)'>Details</button></td>
+                <td><button class="btn btn-danger btn-block" (click)='delete_product(product.name)'>Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>DELIVERERS</p></b>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Busy time</th>
+                <th hidden>Take a Job</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let deliver of delivers.delivers">
+                <td>{{deliver.firstname}}</td>
+                <td [style.background-color]="deliver.status == 'available' ? '#7FFF00' : '#FF4500'">{{deliver.status}}</td>
+                <td>{{deliver.deliver_time | date: 'yyyy-MM-dd hh:ss aa'}}</td>
+                <td hidden><button (click)='take_job()'>TAKE JOB</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    
+    <table border="0" class="table table-striped">
+        <thead>
+            <tr >
+                <b><p>BUSINESS REPORT</p></b>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th>Number of orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let report of business_reports">
+                <td>{{report.day | date: 'yyyy-MM-dd'}}</td>
+                <td>{{report.orders.length}}</td>
+            </tr>
+            <tr>
+                <p><b>Total Quantity of orders: {{total_number_orders}}</b></p>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    
+    <table>
+        <td><button class="btn btn-primary" (click)='make_pdf()'>MAKE PDF</button></td>
+        <td><button class="btn btn-info" (click)='download_pdf()'>DOWNLOAD PDF</button></td>
+    </table>
+    
+    <span style='color: red'>
+        {{message}}
+    </span>
+</body>
+
+<footer>
+    <div class="container pt-5 border-bottom">
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-6 p-0 float-left mb-3">
+            <h5 class="mb-4 font-weight-bold text-uppercase">Student project</h5>
+          </div>
+  
+          <div class="col-md-8">
+            <div class="py-4 d-flex justify-content-center align-items-center">
+              <a class="mr-2" href="https://www.etf.bg.ac.rs/">Copyright 2020, School of Electrical Engineering.</a>
+            </div>
+          </div>
+      </div>
+    </div>
+</footer>
